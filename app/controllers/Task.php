@@ -4,6 +4,7 @@ class Task extends Controller
 {
     public function index()
     {
+        $this->_auth();
         $data = $this->model('Task_model')->getAllTask();
         $this->view('templates/html');
         $this->view('templates/header', 'Task List');
@@ -14,6 +15,7 @@ class Task extends Controller
 
     public function create()
     {
+        $this->_auth();
         $dataID = $this->model('Task_model')->addTask($_POST);
         if ($dataID > 0) {
             $data = $this->model('Task_model')->getTaskById($dataID);
@@ -27,6 +29,7 @@ class Task extends Controller
 
     public function retrieve($id)
     {
+        $this->_auth();
         $data = $this->model('Task_model')->getTaskById($id);
         $this->view('templates/html');
         $this->view('templates/header', 'Detail');
@@ -43,6 +46,7 @@ class Task extends Controller
 
     public function update()
     {
+        $this->_auth();
         $data = $this->model('Task_model')->getTaskById($_POST['id']);
         if ($this->model('Task_model')->editTask($_POST) > 0) {
             Flasher::setFlash('success', 'task ' . $data['task_name'], 'berhasil', 'diubah');
@@ -56,6 +60,7 @@ class Task extends Controller
 
     public function delete($id)
     {
+        $this->_auth();
         $data = $this->model('Task_model')->getTaskById($id);
         if ($this->model('Task_model')->deleteTask($id) > 0) {
             Flasher::setFlash('success', 'task ' . $data['task_name'], 'berhasil', 'dihapus');
@@ -69,6 +74,7 @@ class Task extends Controller
 
     public function search()
     {
+        $this->_auth();
         $data = $this->model('Task_model')->getTaskByName();
         $this->view('templates/html');
         $this->view('templates/header', 'Task List');

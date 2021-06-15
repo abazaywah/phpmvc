@@ -4,12 +4,8 @@ class User extends Controller
 {
     public function index()
     {
-        if (isset($_SESSION['username'])) {
-            header('Location: ' . BASEURL . '/home');
-        } else {
-            header('Location: ' . BASEURL . '/user/login');
-        }
-        exit;
+        $this->_auth();
+        header('Location: ' . BASEURL . '/home');
     }
 
     public function login()

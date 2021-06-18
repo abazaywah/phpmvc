@@ -25,7 +25,7 @@ class Task_model
 
     public function addTask($task)
     {
-        $query = "INSERT INTO $this->table VALUES ('', :task_name)";
+        $query = "INSERT INTO $this->table (task_name) VALUES (:task_name)";
         $this->db->query($query);
         $this->db->bind('task_name', $task['task']);
         $this->db->execute();
